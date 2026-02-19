@@ -1,0 +1,106 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>KrishiMitra | Login</title>
+    <link rel="stylesheet" href="{% static 'css/login.css' %}">
+</head>
+<body>
+
+<!-- Language Toggle -->
+<div class="language-toggle">
+    <button onclick="setLanguage('en')">EN</button>
+    <button onclick="setLanguage('hi')">हिंदी</button>
+</div>
+
+<div class="login-card">
+
+    <!-- Header -->
+    <div class="card-header">
+        <h1 id="appTitle">KrishiMitra</h1>
+        <p id="appTagline">AI-based Crop Recommendation</p>
+    </div>
+
+    <!-- Login Form -->
+  {% if messages %}
+  <div class="flash-wrap">
+      {% for message in messages %}
+      <div class="flash-msg">{{ message }}</div>
+      {% endfor %}
+  </div>
+  {% endif %}
+
+  <form action="{% url 'login' %}" method="post">
+    {% csrf_token %}
+    <div class="form-group">
+        <label id="emailLabel">Email</label>
+        <input type="email" name="email" placeholder="example@gmail.com" required>
+    </div>
+
+    <div class="form-group">
+        <label id="passwordLabel">Password</label>
+        <input type="password" name="password" placeholder="Enter your password" required>
+    </div>
+
+    <button class="login-btn" id="loginBtn">Login</button>
+</form>
+
+<!-- Move links OUTSIDE the form -->
+<div class="auth-links">
+    <a href="{% url 'forgot_password' %}" id="forgotLink">Forgot Password?</a>
+    <a href="{% url 'signup' %}" id="createLink">Create Account</a>
+</div>
+
+
+</div>
+
+<!-- Language Script -->
+<script>
+function setLanguage(lang) {
+    localStorage.setItem("language", lang);
+    applyLanguage(lang);
+    updateActiveButton(lang);
+}
+
+function applyLanguage(lang) {
+    if (lang === 'hi') {
+        document.getElementById("appTitle").innerText = "कृषि मित्र";
+        document.getElementById("appTagline").innerText = "फसल सिफारिश के लिए एआई आधारित प्रणाली";
+        document.getElementById("emailLabel").innerText = "ईमेल";
+        document.getElementById("passwordLabel").innerText = "पासवर्ड";
+        document.getElementById("loginBtn").innerText = "लॉगिन";
+        document.getElementById("forgotLink").innerText = "पासवर्ड भूल गए?";
+        document.getElementById("createLink").innerText = "खाता बनाएँ";
+    } else {
+        document.getElementById("appTitle").innerText = "KrishiMitra";
+        document.getElementById("appTagline").innerText = "AI-based Crop Recommendation";
+        document.getElementById("emailLabel").innerText = "Email";
+        document.getElementById("passwordLabel").innerText = "Password";
+        document.getElementById("loginBtn").innerText = "Login";
+        document.getElementById("forgotLink").innerText = "Forgot Password?";
+        document.getElementById("createLink").innerText = "Create Account";
+    }
+}
+
+function updateActiveButton(lang) {
+    document.querySelectorAll('.language-toggle button')
+        .forEach(btn => btn.classList.remove('active'));
+
+    document
+      .querySelector(`.language-toggle button[onclick="setLanguage('${lang}')"]`)
+      .classList.add('active');
+}
+
+document.addEventListener("DOMContentLoaded", function () {
+    const savedLang = localStorage.getItem("language") || "en";
+    applyLanguage(savedLang);
+    updateActiveButton(savedLang);
+});
+</script>
+<script src="{% static 'js/language.js' %}"></script>
+
+
+</body>
+</html>
+

@@ -1,0 +1,155 @@
+/* RESET */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+}
+
+/* PAGE BACKGROUND */
+body {
+    min-height: 100vh;
+    background: linear-gradient(135deg, #e8f5e9, #f1f8e9);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+   
+ 
+  background: linear-gradient(135deg, #e8f5e9, #f1f8e9),
+              url('paddy.jpg') no-repeat center center / cover;
+ 
+}
+
+
+
+/* BACK BUTTON */
+.back-btn {
+    position: fixed;
+    top: 22px;
+    left: 22px;
+    z-index: 9999;
+    background: #ffffff;
+    padding: 10px 18px;
+    border-radius: 30px;
+    font-weight: 600;
+    color: #1b5e20;
+    text-decoration: none;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.18);
+    transition: all 0.3s ease;
+}
+
+.back-btn:hover {
+    background: #1b5e20;
+    color: #ffffff;
+    transform: translateY(-2px);
+}
+
+/* FORM CARD */
+.form-container {
+    width: 100%;
+    max-width: 420px;
+    background: rgba(255, 255, 255, 0.95);
+    padding: 34px 32px;
+    border-radius: 22px;
+    box-shadow:
+        0 25px 60px rgba(0, 0, 0, 0.15),
+        inset 0 0 0 1px rgba(255,255,255,0.6);
+    backdrop-filter: blur(12px);
+    animation: fadeUp 0.6s ease;
+}
+
+/* ANIMATION */
+@keyframes fadeUp {
+    from {
+        opacity: 0;
+        transform: translateY(25px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* TITLE */
+.form-container h2 {
+    text-align: center;
+    color: #1b5e20;
+    margin-bottom: 28px;
+    font-size: 24px;
+    font-weight: 700;
+}
+
+/* LABELS */
+.form-container label {
+    display: block;
+    margin-bottom: 6px;
+    font-weight: 600;
+    color: #2e7d32;
+    font-size: 14px;
+}
+
+/* INPUTS */
+.form-container input,
+.form-container select {
+    width: 100%;
+    padding: 12px 14px;
+    border-radius: 12px;
+    border: 1.5px solid #c8e6c9;
+    font-size: 14px;
+    margin-bottom: 18px;
+    transition: all 0.25s ease;
+    background: #ffffff;
+}
+
+.form-container input:focus,
+.form-container select:focus {
+    outline: none;
+    border-color: #2e7d32;
+    box-shadow: 0 0 0 3px rgba(46, 125, 50, 0.15);
+}
+
+/* BUTTON */
+.form-container button {
+    width: 100%;
+    margin-top: 10px;
+    padding: 14px;
+    border-radius: 14px;
+    border: none;
+    background: linear-gradient(135deg, #2e7d32, #1b5e20);
+    color: #ffffff;
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+    letter-spacing: 0.3px;
+    box-shadow: 0 12px 25px rgba(46,125,50,0.4);
+    transition: all 0.3s ease;
+}
+
+.form-container button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 18px 35px rgba(46,125,50,0.5);
+}
+
+.form-container button:active {
+    transform: scale(0.98);
+}
+
+.result-box {
+    margin-bottom: 16px;
+    padding: 12px;
+    border-radius: 10px;
+    background: #f1f8e9;
+    border: 1px solid #c8e6c9;
+    color: #1b5e20;
+    font-size: 14px;
+}
+
+.result-box p {
+    margin: 4px 0;
+}
+
+.error-box {
+    background: #ffebee;
+    border-color: #ffcdd2;
+    color: #b71c1c;
+}

@@ -1,0 +1,74 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>KrishiMitra | Dashboard</title>
+    <link rel="stylesheet" href="{% static 'css/dashboard.css' %}">
+    <script src="{% static 'js/language.js' %}" defer></script>
+    <script src="{% static 'js/dashboard.js' %}" defer></script>
+</head>
+<body>
+    <!-- NAVBAR -->
+    <header class="navbar">
+        <div class="logo">
+            <h2>🌾 KrishiMitra</h2>
+        </div>
+        <div class="nav-actions">
+            <a href="{% url 'logout' %}" class="logout-btn">Logout</a>
+            <div class="lang-switch">
+                <button class="lang-btn" data-lang="en">EN</button>
+                <button class="lang-btn" data-lang="hi">हिंदी</button>
+            </div>
+        </div>  
+    </header>
+
+    <section class="weather-alert-strip alert-loading" id="weather-alert-strip">
+        <div class="weather-alert-row">
+            <strong id="weather-location">Detecting location...</strong>
+            <span id="weather-current">Fetching current weather...</span>
+        </div>
+        <p id="weather-alert-message">Checking weather alerts...</p>
+    </section>
+
+    <!-- HERO -->
+    <section class="hero">
+      
+            
+        <h1 id="hero-title">Welcome to KrishiMitra</h1>
+        <p id="hero-subtitle">Smart decisions for better farming 🌱</p>
+      
+    </section>
+
+    <!-- DASHBOARD CARDS -->
+    <section class="cards">
+        <div class="card">
+            <img src="{% static 'images/recommend.jpg' %}" alt="Crop">    
+            <h3 id="crop-title">Crop Recommendation</h3>
+            <p id="crop-desc">Best crop based on soil & weather</p>
+            <a href="{% url 'crop' %}" class="btn" id="crop-btn">Explore</a>
+        </div>
+
+        <div class="card">
+            <img src="{% static 'images/weather.jpg' %}" alt="Weather">
+            <h3 id="weather-title">Weather Forecast</h3>
+            <p id="weather-desc">Live weather & alerts</p>
+            <a href="{% url 'weather' %}" class="btn" id="weather-btn">Explore</a>
+        </div>
+
+        <div class="card">
+            <img src="{% static 'images/soil.jpg' %}" alt="Soil">
+            <h3 id="soil-title">Soil Analysis</h3>
+            <p id="soil-desc">Check soil health</p>
+            <a href="{% url 'soil' %}" class="btn" id="soil-btn">Explore</a>
+        </div>
+
+        <div class="card">
+            <img src="{% static 'images/paddy.jpg' %}" alt="Records">
+            <h3 id="records-title">Crop Records</h3>
+            <p id="records-desc">Track your farm crop history</p>
+            <a href="{% url 'crop_records' %}" class="btn" id="records-btn">Manage</a>
+        </div>
+    </section>
+</body>
+</html>

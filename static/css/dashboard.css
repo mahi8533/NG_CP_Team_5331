@@ -1,0 +1,244 @@
+
+/* ======================
+   GLOBAL RESET
+====================== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Segoe UI", sans-serif;
+}
+
+body {
+    background: #f5f7fa;
+    color: #333;
+    
+}
+
+.weather-alert-strip {
+    margin: 16px 40px 0;
+    padding: 14px 16px;
+    border-radius: 12px;
+    border: 1px solid transparent;
+    background: #e8f5e9;
+}
+
+.weather-alert-row {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-bottom: 6px;
+}
+
+#weather-location {
+    font-size: 15px;
+}
+
+#weather-current {
+    font-size: 14px;
+    color: #2f4f2f;
+}
+
+#weather-alert-message {
+    font-size: 14px;
+    margin: 0;
+}
+
+.weather-alert-strip.alert-loading {
+    border-color: #90caf9;
+    background: #e3f2fd;
+    color: #0d47a1;
+}
+
+.weather-alert-strip.alert-none {
+    border-color: #a5d6a7;
+    background: #e8f5e9;
+    color: #1b5e20;
+}
+
+.weather-alert-strip.alert-warning {
+    border-color: #ffe082;
+    background: #fff8e1;
+    color: #8a6d00;
+}
+
+.weather-alert-strip.alert-danger {
+    border-color: #ef9a9a;
+    background: #ffebee;
+    color: #b71c1c;
+}
+
+/* ======================
+   NAVBAR
+====================== */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 18px 40px;
+    background: #ffffff;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+}
+
+.logo {
+    font-size: 22px;
+    font-weight: 700;
+    color: #2e7d32;
+}
+.lang-switch {
+    display: flex;
+    gap: 6px;
+}
+
+.lang-btn {
+    padding: 6px 10px;
+    border: 1.5px solid #2e7d32;
+    background: white;
+    color: #2e7d32;
+    font-weight: 600;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+/* ACTIVE LANGUAGE */
+.lang-btn.active {
+    background: #2e7d32;
+    color: white;
+}
+
+
+/* ======================
+   HERO SECTION
+====================== */
+.hero {
+    text-align: center;
+    padding: 50px 20px;
+    background: linear-gradient(135deg, #2e7d32, #66bb6a);
+    color: #fff;
+}
+
+.hero h1 {
+    font-size: 34px;
+    margin-bottom: 10px;
+}
+
+.hero p {
+    font-size: 16px;
+    opacity: 0.95;
+}
+
+/* ======================
+   DASHBOARD CARDS
+====================== */
+.cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+    padding: 50px;
+}
+
+.card {
+    background: #ffffff;
+    border-radius: 18px;
+    overflow: hidden;
+    cursor: pointer;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+    transition: transform 0.35s ease, box-shadow 0.35s ease;
+}
+
+.card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 40px rgba(46,125,50,0.25);
+}
+
+.card img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+}
+
+.card h3 {
+    font-size: 20px;
+    margin: 20px 20px 10px;
+    color: #2e7d32;
+}
+
+.card p {
+    font-size: 14px;
+    margin: 0 20px 20px;
+    color: #555;
+}
+
+.card .btn {
+    display: block;
+    margin: 0 20px 25px;
+    text-align: center;
+    padding: 10px;
+    border-radius: 8px;
+    background: #2e7d32;
+    color: white;
+    text-decoration: none;
+    font-weight: 600;
+    transition: background 0.3s ease;
+}
+
+.card .btn:hover {
+    background: #1b5e20;
+}
+
+.nav-actions {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.logout-btn {
+    padding: 6px 14px;
+    border-radius: 6px;
+    background: #e53935;
+    color: #fff;
+    font-size: 14px;
+    text-decoration: none;
+    transition: background 0.2s ease;
+}
+
+.logout-btn:hover {
+    background: #c62828;
+}
+
+
+/* =======================
+   DASHBOARD BUTTONS
+======================= */
+
+.btn {
+    display: inline-block;
+    padding: 12px 26px;
+    background: linear-gradient(135deg, #2e7d32, #66bb6a);
+    color: #fff;
+    text-decoration: none;
+    font-weight: 600;
+    border-radius: 30px;
+    transition: all 0.3s ease;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+}
+
+/* hover */
+.btn:hover {
+    transform: translateY(-3px);
+    background: linear-gradient(135deg, #1b5e20, #43a047);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
+}
+
+/* click */
+.btn:active {
+    transform: scale(0.95);
+}
+
+@media (max-width: 768px) {
+    .weather-alert-strip {
+        margin: 12px 18px 0;
+    }
+}

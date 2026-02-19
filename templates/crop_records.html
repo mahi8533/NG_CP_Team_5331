@@ -1,0 +1,83 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crop Records | KrishiMitra</title>
+    <link rel="stylesheet" href="{% static 'css/form.css' %}">
+</head>
+<body>
+    <a href="{% url 'dashboard' %}" class="back-btn">Back to Dashboard</a>
+
+    <div class="form-container" style="max-width: 900px;">
+        <h2>My Crop Records</h2>
+
+        {% if messages %}
+            {% for message in messages %}
+            <div class="result-box{% if 'error' in message.tags %} error-box{% endif %}">{{ message }}</div>
+            {% endfor %}
+        {% endif %}
+
+        <form method="post" action="{% url 'crop_records' %}">
+            {% csrf_token %}
+            <label for="crop_name">Crop Name</label>
+            <input type="text" id="crop_name" name="crop_name" placeholder="e.g. Wheat" required>
+
+            <label for="field_area_acres">Field Area (acres)</label>
+            <input type="number" step="0.01" id="field_area_acres" name="field_area_acres" placeholder="e.g. 2.50" required>
+
+            <label for="sowing_date">Sowing Date</label>
+            <input type="date" id="sowing_date" name="sowing_date" required>
+
+            <label for="expected_harvest_date">Expected Harvest Date</label>
+            <input type="date" id="expected_harvest_date" name="expected_harvest_date">
+
+            <label for="notes">Notes</label>
+            <input type="text" id="notes" name="notes" placeholder="Any notes about this crop">
+
+            <button type="submit">Save Record</button>
+        </form>
+
+        <div class="result-box" style="margin-top: 20px; background: #ffffff;">
+            <h3 style="margin-bottom: 12px; color: #1b5e20;">Saved Records</h3>
+            {% if records %}
+            <div style="overflow-x: auto;">
+                <table style="width: 100%; border-collapse: collapse; font-size: 14px;">
+                    <thead>
+                        <tr style="background: #e8f5e9;">
+                            <th style="text-align: left; padding: 8px; border: 1px solid #d0e6d1;">Crop</th>
+                            <th style="text-align: left; padding: 8px; border: 1px solid #d0e6d1;">Area</th>
+                            <th style="text-align: left; padding: 8px; border: 1px solid #d0e6d1;">Sowing</th>
+                            <th style="text-align: left; padding: 8px; border: 1px solid #d0e6d1;">Harvest</th>
+                            <th style="text-align: left; padding: 8px; border: 1px solid #d0e6d1;">Notes</th>
+                            <th style="text-align: left; padding: 8px; border: 1px solid #d0e6d1;">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for record in records %}
+                        <tr>
+                            <td style="padding: 8px; border: 1px solid #d0e6d1;">{{ record.crop_name }}</td>
+                            <td style="padding: 8px; border: 1px solid #d0e6d1;">{{ record.field_area_acres }} acres</td>
+                            <td style="padding: 8px; border: 1px solid #d0e6d1;">{{ record.sowing_date }}</td>
+                            <td style="padding: 8px; border: 1px solid #d0e6d1;">{{ record.expected_harvest_date|default:'-' }}</td>
+                            <td style="padding: 8px; border: 1px solid #d0e6d1;">{{ record.notes|default:'-' }}</td>
+                            <td style="padding: 8px; border: 1px solid #d0e6d1;">
+                                <form method="post" action="{% url 'delete_crop_record' record.id %}" style="margin: 0;">
+                                    {% csrf_token %}
+                                    <button type="submit" style="padding: 6px 10px; margin: 0;">Delete</button>
+                                </form>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            {% else %}
+            <p>No records yet. Add your first crop record above.</p>
+            {% endif %}
+        </div>
+    </div>
+    <script src="{% static 'js/language.js' %}"></script>
+</body>
+</html>

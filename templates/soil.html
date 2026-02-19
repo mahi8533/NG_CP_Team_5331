@@ -1,0 +1,62 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Soil Analysis | KrishiMitra</title>
+    <link rel="stylesheet" href="{% static 'css/form.css' %}">
+</head>
+<body>
+
+    <a href="{% url 'dashboard' %}" class="back-btn">Back to Dashboard</a>
+
+    <div class="form-container">
+        <h2>Soil Analysis</h2>
+
+        {% if error %}
+        <div class="result-box error-box">{{ error }}</div>
+        {% endif %}
+
+        {% if detected_soil %}
+        <div class="result-box">
+            <p><strong>Image Detected Soil:</strong> {{ detected_soil.soil_type }}</p>
+            <p><strong>Confidence:</strong> {{ detected_soil.confidence }}%</p>
+            <p><strong>Average RGB:</strong> {{ detected_soil.avg_rgb }}</p>
+        </div>
+        {% endif %}
+
+        {% if soil_report %}
+        <div class="result-box">
+            <p><strong>Soil Type:</strong> {{ soil_report.soil_type }}</p>
+            <p><strong>Soil pH:</strong> {{ soil_report.soil_ph }}</p>
+            <p><strong>Status:</strong> {{ soil_report.status }}</p>
+            <p><strong>Drainage:</strong> {{ soil_report.drainage }}</p>
+            <p><strong>Advice:</strong> {{ soil_report.advice }}</p>
+        </div>
+        {% endif %}
+
+        <form method="POST" action="{% url 'soil' %}" enctype="multipart/form-data">
+            {% csrf_token %}
+
+            <label for="soil_type">Soil Type</label>
+            <select name="soil_type" id="soil_type">
+                <option value="Loamy">Loamy</option>
+                <option value="Clay">Clay</option>
+                <option value="Sandy">Sandy</option>
+                <option value="AUTO">Auto detect from image</option>
+            </select>
+
+            <label for="soil_image">Soil Image (optional)</label>
+            <input type="file" name="soil_image" id="soil_image" accept="image/*">
+
+            <label for="soil_ph">Soil pH</label>
+            <input type="text" name="soil_ph" id="soil_ph" placeholder="e.g. 6.5" required>
+
+            <button type="submit" id="soil-btn">Analyze Soil</button>
+        </form>
+    </div>
+
+    <script src="{% static 'js/language.js' %}"></script>
+</body>
+</html>

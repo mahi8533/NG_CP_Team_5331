@@ -1,0 +1,52 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Crop Recommendation | KrishiMitra</title>
+    <link rel="stylesheet" href="{% static 'css/form.css' %}">
+</head>
+<body>
+
+<a href="{% url 'dashboard' %}" class="back-btn">Back to Dashboard</a>
+
+<div class="form-container">
+    <h2>Crop Recommendation</h2>
+
+    {% if error %}
+    <div class="result-box error-box">{{ error }}</div>
+    {% endif %}
+
+    {% if recommendation %}
+    <div class="result-box">
+        <p><strong>Recommended Crop:</strong> {{ recommendation.crop }}</p>
+        <p><strong>Location:</strong> {{ recommendation.location }}</p>
+        <p><strong>Season:</strong> {{ recommendation.season }}</p>
+        <p><strong>Soil pH:</strong> {{ recommendation.soil_ph }}</p>
+        <p><strong>Reason:</strong> {{ recommendation.reason }}</p>
+    </div>
+    {% endif %}
+
+    <form method="post" action="{% url 'crop' %}">
+        {% csrf_token %}
+
+        <label>Location</label>
+        <input type="text" id="location" name="location" placeholder="Detecting location..." required />
+
+        <label>Season</label>
+        <select name="season">
+            <option value="Kharif">Kharif</option>
+            <option value="Rabi">Rabi</option>
+            <option value="Zaid">Zaid</option>
+        </select>
+
+        <label>Soil pH</label>
+        <input type="number" step="0.1" name="soil_ph" placeholder="e.g. 6.5" required>
+
+        <button type="submit">Recommend Crop</button>
+    </form>
+</div>
+<script src="{% static 'js/crop.js' %}"></script>
+<script src="{% static 'js/language.js' %}"></script>
+
+</body>
+</html>
